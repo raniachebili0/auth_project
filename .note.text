@@ -1,0 +1,79 @@
+ commends:
+ npm install --save @nestjs/jwt
+ npm install uuid
+
+ 
+ -----------------------------------
+ In JavaScript (and TypeScript), a truthy value is any value that is not null, undefined, false, 0, NaN, or an empty string ("").
+
+---------------------------------------
+ query parameters in HTTP requests (e.g., in Postman) are always parsed as strings by default 
+ => to fix this :   async findbyPhoneNb(@Query('nb', ParseIntPipe) nb: number): Promise<User | null>     //ParseIntPipe
+----------------------------------------
+ Excepltions : 
+  BadRequestException,
+  InternalServerErrorException,
+  NotFoundException,
+  UnauthorizedException,
+
+
+  exp of exception responce 
+  {
+  "statusCode": 404,
+  "message": "User with phone number 12345678 does not exist",
+  "error": "Not Found"
+}
+
+---------------------------------------
+const user = {                                              
+  username: 'john_doe',
+  email: 'john@example.com',
+  password: 'secret123', // This is the password
+  fullName: 'John Doe',
+  age: 30
+};
+const { password, ...result } = user;
+
+==>
+result = {
+  username: 'john_doe',
+  email: 'john@example.com',
+  fullName: 'John Doe',
+  age: 30
+}
+password = 'secret123'
+
+
+password is being extracted from the user object and stored in a variable called password.
+The rest of the properties from the user object (everything except password) are collected into a new object, which is assigned to the variable result.
+
+-->This pattern is commonly used for a few reasons:
+*Security/Privacy: You want to exclude sensitive information like the password when returning data to the client. You still need to verify the password for authentication, but you don't want to send the password back in the response.
+In this example, the password is excluded from the result that gets returned. Only the non-sensitive data (username, email, fullName, age) will be returned to the client.
+*Clarity: It makes the code more readable by showing explicitly that password is being removed and that the rest of the user object is being used.
+
+--------------------
+Omit: A TypeScript utility type used to create a new type by excluding specified properties (in this case, password).
+
+
+-----------------
+Encryption vs. Hashing
+
+Feature      :	Encryption                                    	Hashing
+Purpose      :	Protect data confidentiality            ||	Verify data integrity
+Reversible   :	Yes (with decryption key)               ||	No
+Output       :	Variable length (depends on input size)	||  Fixed length
+Key          :	Requires a key	                        ||  No keys needed
+Use Cases    :	Secure communication, data storage      ||	Password storage, data verification
+
+------------------------
+middleware refers to a function that sits between the request and response in an application. Middleware acts as a processing layer that can intercept, modify, or handle incoming requests or outgoing responses.
+
+In Node.js (especially with Express.js), middleware functions are used to handle various aspects of the request/response lifecycle, such as:
+
+Request Parsing (e.g., parsing JSON or form data)
+Authentication (e.g., validating user credentials)
+Logging (e.g., logging request details)
+Error Handling
+Serving Static Files
+
