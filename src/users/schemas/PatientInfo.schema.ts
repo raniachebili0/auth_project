@@ -1,14 +1,12 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, HydratedDocument, SchemaTypes, Types } from 'mongoose';
-import { User } from './users.schema';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { HydratedDocument, SchemaTypes, Types } from "mongoose";
 
-// Define the type of PatientDocument, which is a Mongoose Document of the Patient class
-export type PatientDocument = HydratedDocument<Patient>;
+
+export type PatientInfoDocument = HydratedDocument<PatientInfo>;
 
 @Schema()
-export class Patient extends User {  // Extend Document to inherit Mongoose methods
-  
-    @Prop({  type: [SchemaTypes.ObjectId], ref: 'Encounter' })
+export class PatientInfo {
+ @Prop({  type: [SchemaTypes.ObjectId], ref: 'Encounter' })
     encounterId: Types.ObjectId[];  // Reference to Encounter
   
     @Prop({  type: [SchemaTypes.ObjectId], ref: 'Condition' })
@@ -33,10 +31,9 @@ export class Patient extends User {  // Extend Document to inherit Mongoose meth
     immunizations: Types.ObjectId[];  // Reference to multiple Immunization resources
   
     @Prop({  type: [SchemaTypes.ObjectId], ref: 'AllergyIntolerance' })
-    allergyIntolerances: Types.ObjectId[];  // Reference to multiple AllergyIntolerance resources
+    allergyIntolerances: Types.ObjectId[];
 
-  
+
 }
 
-// Create the Mongoose schema for the Patient model
-export const PatientSchema = SchemaFactory.createForClass(Patient);
+export const PatientInfoSchema = SchemaFactory.createForClass(PatientInfo);

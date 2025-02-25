@@ -11,11 +11,6 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
 
-  @Get('byPhoneNb')
-  async findbyPhoneNb(@Query('nb') nb: string): Promise<User > {
-    return this.usersService.findOnebyPhoneNb(nb);
-  }
-
   @UseGuards(AuthGuard)
   @Get('getbyId')
   findOne( @Req() req) {

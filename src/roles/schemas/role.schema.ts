@@ -1,6 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Action } from '../enums/action.enum';
 import { Resource } from '../enums/resource.enum';
+import { Roles } from '../enums/roles.enum';
+import { IsEnum } from 'class-validator';
 
 @Schema()
 class Permission {
@@ -13,6 +15,7 @@ class Permission {
 
 @Schema()
 export class Role {
+  //@IsEnum(Roles)
   @Prop({ required: true })
   name: string;
 

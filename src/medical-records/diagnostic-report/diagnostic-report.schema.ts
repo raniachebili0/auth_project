@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, SchemaTypes, Types } from 'mongoose';
-import { Patient } from 'src/users/schemas/patient.schema';  // Reference to Patient
 
 @Schema()
 export class DiagnosticReport extends Document {

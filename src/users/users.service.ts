@@ -12,11 +12,11 @@ import { RolesService } from 'src/roles/roles.service';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectModel(User.name) private userModel : Model <UserDocument>,
+    @InjectModel(User.name) private usersModel : Model <User>,
     private rolesService: RolesService,){}
 
   async getUserPermissions(userId: string) {
-    const user = await this.userModel.findById(userId);
+    const user = await this.usersModel.findById(userId);
 
     if (!user) throw new BadRequestException();
 
@@ -24,18 +24,18 @@ export class UsersService {
     return role.permissions;
   }
   
-  async findOnebyPhoneNb(nb: string): Promise<User> {
-      const user = await this.userModel.findOne({numberPhone: nb}).exec();
+  async findOnebyemail(email: string): Promise<User> {
+      const user = await this.usersModel.findOne({email}).exec();
       return user; 
   }
 
   async create(createUserDto: CreateUserDto) {
-    const createUser = new this.userModel(createUserDto);
+    const createUser = new this.usersModel(createUserDto);
     return createUser.save();
   }
 
   async findOne(id: string): Promise<User> {
-    const user = await this.userModel.findById(id).exec();
+    const user = await this.usersModel.findById(id).exec();
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);
     }

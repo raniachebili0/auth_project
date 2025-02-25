@@ -13,8 +13,16 @@ export class RolesService {
     return this.RoleModel.create(role);
   }
 
+  async findOneByname(role: string ) {
+    return this.RoleModel.findOne({ name: role});
+  }
+
   async getRoleById(roleId: string) {
     return this.RoleModel.findById(roleId);
+  }
+
+  async getRoles() {
+    return this.RoleModel.find();
   }
 
 }

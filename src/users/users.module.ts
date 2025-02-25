@@ -14,6 +14,6 @@ import { RolesModule } from 'src/roles/roles.module';
   }])],
   controllers: [UsersController],
   providers: [UsersService],
-  exports:[UsersService],
+  exports:[UsersService,MongooseModule],
 })
 export class UsersModule {}
